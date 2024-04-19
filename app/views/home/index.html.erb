@@ -1,13 +1,2 @@
-<!-- app/views/home/index.html.erb -->
-<h1>Bienvenue sur AquaTrack</h1>
-<p>Gérez votre consommation d'eau efficacement et contribuez à la préservation des ressources hydriques.</p>
-
-<% if session[:user_id] %>
-  <%= link_to 'Voir votre profil', user_path(session[:user_id]) %>
-  <%= link_to 'Voir vos consommations', user_consumptions_path(session[:user_id]) %>
-  <%= link_to 'Voir vos alertes', user_alerts_path(session[:user_id]) %>
-  <%= link_to 'Déconnexion', session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Connexion', new_session_path %>
-  <%= link_to 'Inscription', new_user_path %>
-<% end %>
+<h1>Home#index</h1>
+<p>Find me in app/views/home/index.html.erb</p>

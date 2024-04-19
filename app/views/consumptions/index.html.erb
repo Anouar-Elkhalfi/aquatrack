@@ -1,0 +1,8 @@
+<!-- Liste des consommations d'eau de l'utilisateur -->
+<h1>Consommations d'Eau</h1>
+<ul>
+  <% @consumptions.each do |consumption| %>
+    <li><%= consumption.quantity %> litres enregistrés le <%= consumption.recorded_at.strftime("%d/%m/%Y à %H:%M") %></li>
+  <% end %>
+</ul>
+

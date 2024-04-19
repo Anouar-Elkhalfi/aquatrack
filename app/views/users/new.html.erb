@@ -1,0 +1,15 @@
+<!-- Formulaire de connexion -->
+<h1>Connexion</h1>
+<%= form_with(scope: :session, url: session_path, local: true) do |form| %>
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true %>
+  </div>
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password, required: true %>
+  </div>
+  <div>
+    <%= form.submit "Connexion" %>
+  </div>
+<% end %>

@@ -1,10 +1,25 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Page d'accueil
+  root 'home#index'
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  # Routes pour les utilisateurs
+  resources :users, only: [:show, :create, :update, :destroy] do
+    # Routes imbriquées pour les consommations d'eau
+    resources :consumptions, only: [:index, :create]
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+    # Routes imbriquées pour les alertes
+    resources :alerts, only: [:index, :create]
+  end
+
+  # Routes pour les consommations d'eau accessibles directement
+  resources :consumptions, only: [:show, :update, :destroy]
+
+  # Routes pour les alertes accessibles directement
+  resources :alerts, only: [:show, :update, :destroy]
+
+  # Routes pour la gestion de session
+  resource :session, only: [:new, :create, :destroy]
+
+  # Route pour Action Cable (WebSockets)
+  mount ActionCable.server => '/cable'
 end

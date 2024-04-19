@@ -1,11 +1,13 @@
 class ConsumptionsController < ApplicationController
+  before_action :set_user
+
   def index
-    @consumptions = Consumption.where(user_id: params[:user_id])
+    @consumptions = @user.consumptions
     render json: @consumptions
   end
 
   def create
-    @consumption = Consumption.new(consumption_params)
+    @consumption = @user.consumptions.build(consumption_params)
     if @consumption.save
       render json: @consumption, status: :created
     else
@@ -15,7 +17,11 @@ class ConsumptionsController < ApplicationController
 
   private
 
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
   def consumption_params
-    params.require(:consumption).permit(:user_id, :quantity, :recorded_at)
+    params.require(:consumption).permit(:quantity, :recorded_at)
   end
 end
